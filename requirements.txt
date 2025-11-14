@@ -1,2 +1,6 @@
 fastapi[standard]
 ruff
+websockets
+sqlalchemy
+alembic
+aiosqlite
