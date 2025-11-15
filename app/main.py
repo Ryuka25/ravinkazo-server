@@ -80,6 +80,7 @@ async def create_experience(
     coordinates: str = Form(...),
     journeyPictures: list[UploadFile] = File(...),
     idPicture: UploadFile = File(None),
+    email: str | None = Form(None),
     db: AsyncSession = Depends(get_db),
 ):
     coords = json.loads(coordinates)
@@ -89,6 +90,7 @@ async def create_experience(
         message=message,
         lat=coords["lat"],
         lon=coords["lon"],
+        email=email
     )
     experience = Experience(**exp_data.dict())
     db.add(experience)

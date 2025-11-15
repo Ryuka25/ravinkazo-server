@@ -13,6 +13,7 @@ class Experience(Base):
     message = Column(String)
     lat = Column(Float)
     lon = Column(Float)
+    email = Column(String, nullable=True)
     added_date = Column(DateTime, default=datetime.datetime.utcnow)
     pictures = relationship("Picture", back_populates="experience")
 

@@ -25,6 +25,7 @@ class ExperienceBase(BaseModel):
     message: str
     lat: float
     lon: float
+    email: str | None = None
 
 
 class ExperienceCreate(ExperienceBase):
@@ -34,6 +35,7 @@ class ExperienceCreate(ExperienceBase):
 class Experience(ExperienceBase):
     id: int
     added_date: datetime.datetime
+    email: str | None = None
     pictures: list[Picture] = []
 
     class Config:
