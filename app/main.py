@@ -52,7 +52,8 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             data = await websocket.receive_text()
-            await manager.broadcast(f"Client says: {data}")
+            message_data = {"event_type": "message", "event_details": data}
+            await manager.broadcast(json.dumps(message_data))
     except Exception:
         manager.disconnect(websocket)
 
