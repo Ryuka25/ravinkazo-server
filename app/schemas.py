@@ -1,8 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 import datetime
 
 
 class PictureBase(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
     path: str
     is_id_picture: int
 
@@ -18,8 +20,9 @@ class Picture(PictureBase):
     class Config:
         orm_mode = True
 
-
 class ExperienceBase(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     firstname: str
     lastname: str
     message: str

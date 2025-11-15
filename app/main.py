@@ -11,6 +11,7 @@ from app.websocket import manager
 from app.schemas import Experience as ExperienceSchema, ExperienceCreate, Picture as PictureSchema
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
+from sqlalchemy import desc
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -130,9 +131,13 @@ async def create_experience(
 
     # Broadcast the new experience
     if experience:
-        experience_data = ExperienceSchema.from_orm(experience).dict()
-        event_message = {"event_type": "experience-created", "event_details": experience_data}
-        await manager.broadcast(json.dumps(event_message))
+        experience_data = ExperienceSchema.model_validate(experience).model_dump()
+        event_message = {
+            "event_type": "experience-created",
+            "event_details": experience_data
+        }
+        await manager.broadcast(json.dumps(event_message, default=str))
+
     return experience
 
 
@@ -141,7 +146,7 @@ async def read_experiences(
     skip: int = 0, limit: int = 100, db: AsyncSession = Depends(get_db)
 ):
     result = await db.execute(
-        select(Experience).options(selectinload(Experience.pictures)).offset(skip).limit(limit)
+        select(Experience).options(selectinload(Experience.pictures)).order_by(desc(Experience.id)).offset(skip).limit(limit)
     )
     experiences = result.scalars().all()
     return experiences
