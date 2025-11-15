@@ -127,6 +127,12 @@ async def create_experience(
         .filter(Experience.id == experience_id)
     )
     experience = result.scalars().first()
+
+    # Broadcast the new experience
+    if experience:
+        experience_data = ExperienceSchema.from_orm(experience).dict()
+        event_message = {"event_type": "experience-created", "event_details": experience_data}
+        await manager.broadcast(json.dumps(event_message))
     return experience
 
 
