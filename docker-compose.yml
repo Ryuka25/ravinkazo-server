@@ -4,8 +4,8 @@ services:
   fastapi:
     build: .
     container_name: fastapi-app
-    expose:
-      - "8000"
+    ports:
+      - "8001:8000"
     volumes:
       - ./uploads:/app/uploads   # persistent uploaded files
       - ./ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
