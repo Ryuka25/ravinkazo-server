@@ -4,7 +4,7 @@ from sqlalchemy.orm import declarative_base
 
 # Build an absolute path to the database file
 # This will place the database in the root of the project
-db_path = "./ravinkazo.db"
+db_path = "./data/ravinkazo.db"
 DATABASE_URL = f"sqlite+aiosqlite:///{db_path}"
 
 engine = create_async_engine(DATABASE_URL, connect_args={"check_same_thread": False})
