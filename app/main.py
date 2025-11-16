@@ -19,7 +19,9 @@ app = FastAPI()
 
 # Configure CORS
 origins = [
-    "*",
+    "http://localhost",
+    "http://localhost:5173",  # Assuming your client runs on port 5173
+    "https://ravinkazo.vercel.app/",
 ]
 
 app.add_middleware(
