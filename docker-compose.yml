@@ -8,5 +8,5 @@
         - "8001:8000"
       volumes:
         - ../files/uploads/:/app/uploads/   # persistent uploaded files
-        - ./files/ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
+        - ../files/ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
       restart: always
