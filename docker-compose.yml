@@ -7,7 +7,6 @@
       ports:
         - "8001:8000"
       volumes:
-        - ./uploads:/app/uploads   # persistent uploaded files
-        - ./ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
-        - ./ravinkazo.txt:/app/ravinkazo.txt  # persistent SQLite DB
+        - ../files/uploads:/app/uploads   # persistent uploaded files
+        - ./files/ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
       restart: always
