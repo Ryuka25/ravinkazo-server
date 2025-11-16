@@ -1,14 +1,13 @@
-version: "3.9"
+  version: "3.9"
 
-services:
-  fastapi:
-    build: .
-    container_name: fastapi-app
-    ports:
-      - "8001:8000"
-    volumes:
-      - ./uploads:/app/uploads   # persistent uploaded files
-      - ./ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
-    environment:
-      - DATABASE_URL=sqlite:////app/ravinkazo.db
-    restart: always
+  services:
+    fastapi:
+      build: .
+      container_name: fastapi-app
+      ports:
+        - "8001:8000"
+      volumes:
+        - ./uploads:/app/uploads   # persistent uploaded files
+        - ./ravinkazo.db:/app/ravinkazo.db  # persistent SQLite DB
+        - ./ravinkazo.txt:/app/ravinkazo.txt  # persistent SQLite DB
+      restart: always
